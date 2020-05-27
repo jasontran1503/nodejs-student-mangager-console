@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <title>Students</title>
+</head>
+
+<body>
+    <div class="my-4 ml-3">
+        <h1><%= title %></h1>
+    </div>
+    <div class="container">
+        <button type="button" class="btn btn-warning mb-2 ml-3">
+            <a href="/add-student">Add</a>
+        </button>
+        <form class="form-inline" action="/search-student" method="POST">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" placeholder="Search..." />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </form>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (students.length > 0) { %> <% students.forEach(student => { %>
+                <tr>
+                    <th scope="row"><%= student.id %></th>
+                    <td><%= student.name %></td>
+                    <td><%= student.age %></td>
+                    <td><%= student.className %></td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            <a href="/update-student/<%= student.id %>">Update</a>
+                        </button>
+                        <form action="/delete-student/<%= student.id %>" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %> <% } else { %>
+                <td>No data found</td>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
